@@ -11,9 +11,9 @@
 <script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>
 <script>
 	$(function(){
-		$("#modi, #del").on("click",function(){
+		$("#modi, #del, #list").on("click",function(){
 			$(location).attr('href',attr('data-url'));
-		})
+		});
 	})
 </script>
 <title>Insert title here</title>
@@ -37,13 +37,20 @@
 		<td>${memberVO.birth }</td>
 		<td>${memberVO.phone }</td>
 		<td>
-			<c:if test="${memberVO.gender eq 'M' }">남</c:if>
-			<c:if test="${memberVO.gender eq 'W' }">여</c:if>
+		 ${memberVO.gender } 
+			<c:if test="${memberVO.gender == 'M'}">남</c:if>
+			<c:if test="${memberVO.gender == 'W'}">여</c:if>
 		</td>
 		<td><button id="modi" data-url="/member/memberModify/${memberVO.id }">수정</button></td>
 		<td><button id="del" data-url="/member/memberDelete/${memberVO.id }">삭제</button></td>
 	</tr>
 	</c:forEach>
+	<tr>
+		<td colspan="8" align="center">
+			<button id="list" data-url="/member/memberJoin"></button>
+		</td>
+	</tr>
+	
 </table>
 
 </body>

@@ -41,7 +41,7 @@ public class MemberController {
 			memberService.memberInsert(memberVO);
 			logger.info("회원가입 완료");
 		}
-		return "index";
+		return "redirect:/member/memberList";
 	}
 
 	@RequestMapping(value="/memberModify/{id:.+}")
@@ -58,7 +58,7 @@ public class MemberController {
 				return "/member/memberModify";
 			}else {
 				memberService.memberUpdate(memberVO);
-				return "redirect:/";
+				return "redirect:/member/memberList";
 			}
 		}
 	
@@ -69,7 +69,7 @@ public class MemberController {
 			}else {
 				
 			}
-			return "redirect:/";
+			return "redirect:/member/memberList";
 	}
 	
 	@RequestMapping(value = "/memberList")

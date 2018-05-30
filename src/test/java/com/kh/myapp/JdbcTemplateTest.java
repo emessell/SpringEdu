@@ -33,7 +33,7 @@ public class JdbcTemplateTest {
 		logger.info(memberDAO.toString());
 		
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("admin4@kh.com");
+		memberVO.setId("admin5@kh.com");
 		memberVO.setPasswd("1234");
 		memberVO.setName("admin");
 		memberVO.setBirth("930425");

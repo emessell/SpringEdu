@@ -28,10 +28,10 @@ public class DbConnTest {
 	public void test() throws SQLException {
 		try(Connection con = ds.getConnection()) {
 			logger.info("연결 성공");
-			logger.trace("연결 성공");
-			logger.debug("연결 성공");
-			logger.warn("연결 성공");
-			logger.error("연결 성공");
+//			logger.trace("연결 성공");
+//			logger.debug("연결 성공");
+//			logger.warn("연결 성공");
+//			logger.error("연결 성공");
 		} catch(Exception e) {
 			logger.info("연결 오류");
 			e.printStackTrace();

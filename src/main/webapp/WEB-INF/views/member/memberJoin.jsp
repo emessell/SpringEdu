@@ -50,6 +50,7 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
+<h1>회원가입</h1>
 <form:form modelAttribute="memberVO" action="/member/memberJoinOK" method="post">
 <label style="margin-top:30px"></label><br />
 

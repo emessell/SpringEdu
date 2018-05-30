@@ -1,12 +1,13 @@
-package com.kh.myapp;
+package com.kh.myapp.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,11 +21,11 @@ import com.kh.myapp.member.vo.MemberVO;
 
 @Controller
 @RequestMapping("/member")
-@SessionAttributes("memberVO")
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@Autowired
+	@Qualifier("memberServiceImplXML")
 	MemberService memberService;
 
 	@RequestMapping("/memberJoin")
@@ -74,8 +75,8 @@ public class MemberController {
 	
 	@RequestMapping(value = "/memberList")
 	public String memberList(Model model) {
-		ArrayList<MemberVO> alist = memberService.getMemberAll();
-		model.addAttribute("memberVOS",alist);
+		List<MemberVO> list = memberService.getMemberList();
+		model.addAttribute("memberVOS",list);
 		logger.info("memberList?id");
 		return "/member/memberList";
 	}

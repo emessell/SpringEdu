@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.myapp.member.vo.MemberVO;
 
-@Repository("memberDAO")
+@Repository
 public class MemberDAOImplJDBC implements MemberDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -27,13 +27,6 @@ public class MemberDAOImplJDBC implements MemberDAO {
 		StringBuffer str = new StringBuffer();
 		str.append("insert into member (id, passwd, name, birth, phone, gender) ");
 		str.append("values(?,?,?,?,?,?) ");
-		System.out.println(str.toString()
-				+memberVO.getId()
-				+memberVO.getPasswd()
-				+memberVO.getName()
-				+memberVO.getBirth()
-				+memberVO.getPhone()
-				+memberVO.getGender());
 		this.jdbcTemplate.update(
 				str.toString()
 				,memberVO.getId()
@@ -43,7 +36,6 @@ public class MemberDAOImplJDBC implements MemberDAO {
 				,memberVO.getPhone()
 				,memberVO.getGender()
 				);
-
 	}
 
 	@Override

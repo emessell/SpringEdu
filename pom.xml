@@ -21,6 +21,12 @@
 		</repository>
 	</repositories>
 	<dependencies>
+		<dependency>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-resources-plugin</artifactId>
+    		<version>2.4.3</version>
+		</dependency>
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -168,7 +174,7 @@
 		<!-- End Webjars -->
 		
 		
-		<!-- mybatis ?곕룞???꾪븳 ?ㅼ젙   -->
+		<!-- mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis</artifactId>
@@ -199,7 +205,7 @@
 		    <artifactId>commons-dbcp2</artifactId>
 		    <version>2.3.0</version>
 		</dependency>	
-		<!-- mybatis ?곕룞 ?ㅼ젙 ??-->
+		<!-- mybatis-->
 		
 		<!-- JPA(Java Persitence API) Validation -->
 		<dependency>

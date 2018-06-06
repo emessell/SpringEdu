@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.kh.myapp.login.service.LoginService;
+import com.kh.myapp.login.vo.LoginVO;
 import com.kh.myapp.member.vo.MemberVO;
 
 @ExtendWith(SpringExtension.class) //junit5 버전 사용
@@ -18,7 +19,7 @@ import com.kh.myapp.member.vo.MemberVO;
 
 public class LoginTest {
 	
-	private static Logger logger = LoggerFactory.getLogger(DbConnTest.class);
+	private static Logger logger = LoggerFactory.getLogger(LoginTest.class);
 	
 	@Autowired
 	@Qualifier("loginServiceImplXML")
@@ -27,10 +28,10 @@ public class LoginTest {
 	
 	@Test
 	public void member() {
-		MemberVO memberVO = new MemberVO();
-		memberVO.setId("admin@kh.com");
-		memberVO.setPasswd("1234");
-		MemberVO memVO = loginService.getMember(memberVO);
+		LoginVO loginVO = new LoginVO();
+		loginVO.setId("admin@kh.com");
+		loginVO.setPasswd("1234");
+		MemberVO memVO = loginService.getMember(loginVO);
 		logger.info(memVO.toString());
 	}
 	

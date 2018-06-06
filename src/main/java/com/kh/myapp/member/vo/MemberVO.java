@@ -3,7 +3,6 @@ package com.kh.myapp.member.vo;
 import java.sql.Date;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -19,10 +18,8 @@ public class MemberVO {
 	@Size(min=4,max=20,message="이름은 4-20byte로 입력해주세요.")
 	private String name;	
 	
-	//@NotNull
 	private String birth;
 	
-	//@NotNull
 	private String phone;
 	
 	private String gender;
@@ -30,6 +27,11 @@ public class MemberVO {
 	private Date udate;
 	
 	public MemberVO() {}
+	
+	public MemberVO(MemberVO memberVO) {
+		this.id = memberVO.getId();
+		this.passwd = memberVO.getPasswd();
+	}
 	
 	public MemberVO(String id, String passwd, String name, String birth, String phone, String gender, Date cdate,
 			Date udate) {

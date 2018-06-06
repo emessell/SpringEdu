@@ -2,6 +2,8 @@ package com.kh.myapp.member.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kh.myapp.member.vo.MemberVO;
 
 public interface MemberService {
@@ -19,5 +21,11 @@ public interface MemberService {
 	
 	// 회원정보 삭제
 	public void memberDelete(String id);
+	
+	// 아이디 찾기
+	public String findId(String name, String phone);
+		
+	// 비밀번호 찾기
+	public String findPw(String id, String name, String phone);
 
 }

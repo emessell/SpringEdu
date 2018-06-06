@@ -41,7 +41,19 @@ public class MemberServiceImplXML implements MemberService {
 	@Override
 	public void memberDelete(String id) {
 		memberDAO.delete(id);
-
 	}
+
+	@Override
+	public String findId(String name, String phone) {
+		return memberDAO.findId(name, phone);
+	}
+
+	@Override
+	public String findPw(String id, String name, String phone) {
+		return memberDAO.findPw(id, name, phone);
+	}
+
+	
+	
 
 }

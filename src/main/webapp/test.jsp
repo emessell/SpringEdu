@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/webedu/public/bootstrap-4.1.0/dist/css/bootstrap.css">
-<script src="/webedu/public/jquery/jquery-3.3.1.js"></script>
+<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
 <script src="/webedu/public/bootstrap-4.1.0/dist/js/bootstrap.js"></script>
 <title>Insert title here</title>
 <script>

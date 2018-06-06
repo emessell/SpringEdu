@@ -6,7 +6,6 @@ import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.kh.myapp.member.vo.MemberVO;
@@ -46,5 +45,15 @@ public class MemberDAOImplXML implements MemberDAO{
 	
 	@Override
 	public void setDataSource(DataSource dataSource) {
+	}
+
+	@Override
+	public String findId(String name, String phone) {
+		return sqlSession.getMapper(MemberDAO.class).findId(name, phone);
+	}
+
+	@Override
+	public String findPw(String id, String name, String phone) {
+		return sqlSession.getMapper(MemberDAO.class).findPw(id, name, phone);
 	}
 }

@@ -21,11 +21,12 @@
 		</repository>
 	</repositories>
 	<dependencies>
-		<dependency>
-    		<groupId>org.apache.maven.plugins</groupId>
-    		<artifactId>maven-resources-plugin</artifactId>
-    		<version>2.4.3</version>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
+<dependency>
+    <groupId>org.apache.maven</groupId>
+    <artifactId>maven-plugin-api</artifactId>
+    <version>3.5.3</version>
+</dependency>
 
 		<!-- Spring -->
 		<dependency>
@@ -224,6 +225,14 @@
 		    <version>6.0.10.Final</version>
 		</dependency>
 		<!-- JPA(Java Persitence API) Validation ?-->
+		
+		<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>font-awesome</artifactId>
+    <version>5.0.13</version>
+</dependency>
+		
 	</dependencies>
     <build>
         <plugins>

@@ -25,19 +25,19 @@ $(function(){
 	$("#joinBtn").on("click",function(e){
 		e.preventDefault();
 		$("form").submit();
-		)};
+	});
 		
 	$("#joinClearBtn").on("click",function(e){
 		e.preventDefault();
 		$("form").each(function(){
 			this.reset();
 		});
-	)};
+	});
 		
 	$("#joinCancelBtn").on("click",function(e){
 		e.preventDefault();
 		location.href="/";
-	)};
+	});
 });
 </script>
 <style>

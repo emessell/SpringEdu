@@ -2,8 +2,6 @@ package com.kh.myapp.member.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.kh.myapp.member.vo.MemberVO;
 
 public interface MemberService {

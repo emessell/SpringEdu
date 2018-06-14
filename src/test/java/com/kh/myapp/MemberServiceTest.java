@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,11 +21,12 @@ public class MemberServiceTest {
 	private static Logger Logger = LoggerFactory.getLogger(DbConnTest.class);
 	
 	@Autowired
+	@Qualifier("memberServiceImplXML")
 	MemberService memberService;	// 컨테이너상에서는 memberSerivceImpl이 올라갔지만 상위타입으로 받을 수 있음ㅎㅎㅎㅎ 
 	
 	@Test
 	public void test() {
-		MemberVO memberVO = memberService.getByMemberId("admin@kh.com");
+		MemberVO memberVO = memberService.getByMemberId("admin111@kh.com");
 		Logger.info(memberVO.toString());
 	}
 }

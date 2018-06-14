@@ -2,14 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.css">
-<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
-<script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>
+<jsp:include page="/WEB-INF/views/nav.jsp" flush="true"></jsp:include>
 <script>
 $(function(){
 	
@@ -90,5 +83,4 @@ $(function(){
 	<button id="modifyClearBtn" class="btn btn-danger">초기화</button>
 	<button id="modifyCancelBtn" class="btn btn-danger">돌아가기</button>
 </form:form>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/footer.jsp" flush="true"></jsp:include>

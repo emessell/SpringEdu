@@ -1,51 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html lang="en">
+<script>
+$(function(){
+	$("#foundPwContent").hide();
+	$("#findPw").on("click",function(e) {
+	   var id = $("input[id=id]").val();
+	   var name = $("input[id=names]").val();
+	   var phone = $("input[id=phones]").val();
+	   $.ajax({
+	      type : "GET",
+	      url : "/rest/findPwOK",
+	      dataType : "text",
+	      data : {
+	         id, name, phone
+	      },
+	      success : function(data) {
+	         $("#findPwContent").hide();
+	         $("#foundPwContent").show();
+	         $("#foundPw").html(data);
+	      },
+	      error : function(e) {
+	         alert("조회된 비밀번호가 없습니다.");
+	      }
+	   }); 
+	});
+})
+</script>
+<!-- Modal -->
+	<div class="modal fade" id="findPwModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true" style="height:80%;">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="findPwContent">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Find Password</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form:form modelAttribute="find" method="post">
+			<div class="modal-body">
+						<!-- Material input email -->
+						<div class="md-form">
+							<i class="fa fa-envelope prefix indigo-text"></i>
+							<form:input type="text" path="id" class="form-control" id="id" />
+							<label for="id">Your email</label>
+						</div>
+						
+						<!-- Material input name -->
+						<div class="md-form">
+							<i class="fa fa-envelope prefix indigo-text"></i>
+							<form:input type="text" path="name" class="form-control" id="names" />
+							<label for="names">Your name</label>
+						</div>
 
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-    <!-- Font Awesome -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!-- Bootstrap core CSS -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Material Design Bootstrap -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
-<title>Insert title here</title>
-</head>
-<body>
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">...</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
+						<!-- Material input password -->
+						<div class="md-form">
+							<i class="fa fa-lock prefix indigo-text"></i>
+							<form:input type="text" path="phone" class="form-control"
+								id="phones" />
+							<label for="phones">Your phone</label>
+						</div>
+					
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" id="findPw" class="btn btn-primary" data-target="#modalSubscriptionForm">Find Password</button>
+			</div>
+			</form:form>
+		</div>
+		<div class="modal-content" id="foundPwContent">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Your Password</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				Your Password: <span id="foundPw"></span>					
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
-
-	<!-- SCRIPTS -->
-    <!-- JQuery -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- Bootstrap tooltips -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<!-- MDB core JavaScript -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
-</body>
-</html>
+</div>

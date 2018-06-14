@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.myapp.member.service.MemberService;
 import com.kh.myapp.member.vo.MemberVO;
@@ -81,16 +80,5 @@ public class MemberController {
 		return "/member/memberList";
 	}
 	
-//	@RequestMapping(value="/findIdOK")
-//	public String findIdOK(@RequestParam("name") String name, @RequestParam("phone") String phone, Model model) {
-//		model.addAttribute("id",memberService.findId(name, phone));
-//		return "/member/findIdOK";
-//	}
-//	
-//	@RequestMapping(value="/findPwOK")
-//	public String findPwOK(@RequestParam("id") String id,@RequestParam("name") String name, @RequestParam("phone") String phone, Model model) {
-//		model.addAttribute("passwd",memberService.findPw(id,name, phone));
-//		return "/member/findPwOK";
-//	}
 
 }

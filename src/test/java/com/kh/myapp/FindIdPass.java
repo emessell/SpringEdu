@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.kh.myapp.login.dao.LoginDAO;
-import com.kh.myapp.login.vo.LoginVO;
 import com.kh.myapp.member.dao.MemberDAO;
 
 @ExtendWith(SpringExtension.class)

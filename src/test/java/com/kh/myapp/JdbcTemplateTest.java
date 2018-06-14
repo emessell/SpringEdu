@@ -1,12 +1,12 @@
 package com.kh.myapp;
 
-import javax.sql.DataSource;
-
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -22,18 +22,13 @@ public class JdbcTemplateTest {
 	private static final Logger logger = LoggerFactory.getLogger(DbConnTest.class);
 	
 	@Autowired
-	DataSource dataSource;
-//	private MemberDAOImplJDBC memberDAO = new MemberDAOImplJDBC();
-	@Autowired
+	@Qualifier("memberDAOImplXML")
 	private MemberDAO memberDAO;
 	
-	@Test
+	@Test @Ignore
 	public void test() {
-		memberDAO.setDataSource(dataSource);
-		logger.info(memberDAO.toString());
-		
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("admin5@kh.com");
+		memberVO.setId("admin119@kh.com");
 		memberVO.setPasswd("1234");
 		memberVO.setName("admin");
 		memberVO.setBirth("930425");

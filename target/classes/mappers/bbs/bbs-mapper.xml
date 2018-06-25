@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bbsdao">
+
+	<insert id="insert">
+		insert into bbs(bnum, btitle, bid, bname, bhit, bcontent, bgroup, bstep, bindent)
+		values(bbsnum_seq.nextval,#{btitle},#{bid},#{bname},#{bhit},#{bcontent},bbsnum_seq.currval,0,0)
+	</insert>
+	
+	<!-- 글 목록 가져오기 -->
+	<select id="list" resultType="BbsDTO"> 
+		select bnum, btitle, bname, bhit, bcontent, bcdate, bgroup, bstep, bindent from bbs
+		order by bgroup desc, bstep asc, bcdate desc
+	</select>
+	
+	<select id="view" resultType="BbsDTO">
+		select btitle, bname, bcontent, bcdate, bnum, bid from bbs where bnum=#{bnum}
+	</select>
+	
+	<update id="modify">
+		update bbs set btitle=#{btitle},bcontent=#{bcontent} where bnum=#{bnum}
+	</update>
+	
+	<delete id="delete">
+		delete from bbs where bnum=#{bnum}
+	</delete>
+	
+	<insert id="reply">
+		insert into bbs (bnum, btitle,bid, bname, bhit, bcontent, bgroup, bstep, bindent)
+		values(bbsnum_seq.nextval,#{btitle},#{bid},#{bname},#{bhit},#{bcontent},#{bgroup},#{bstep},#{bindent})
+	</insert>
+	
+	<select id="replyView" resultType="BbsDTO">
+		select bnum, btitle, bid, bname, bhit, bcontent, bcdate, bgroup, bstep, bindent
+		from bbs where bnum = #{bnum}
+	</select>
+	
+	<!-- 검색안했을때 10개씩 -->
+	<select id="listPageCri" resultType="BbsDTO">
+		select t2.* from (select row_number() over (order by bgroup desc, bstep asc) 
+			as num, t1.* from bbs t1) t2 where num between #{startRecord} and #{endRecord}
+	</select>
+	
+	<select id="totalRec" resultType="int">
+		select count(*) from bbs
+	</select>
+	
+	<!-- 검색했을때 -->
+	<select id="listFindCri" resultType="BbsDTO">
+		select t2.* from (select row_number() over
+		(ORDER BY bgroup desc, bstep asc) as num, t1.* FROM bbs t1 where bnum > 0 and
+		<choose>
+		    <when test='searchType == "TC"'>
+		      btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%'
+		    </when>
+		    <when test='searchType == "T"'>
+		      btitle like '%'||#{keyword}||'%'
+		    </when>
+		    <when test='searchType == "C"'>
+		      bcontent like '%'||#{keyword}||'%'
+		    </when>
+		    <when test='searchType == "W"'>
+		      bname like '%'||#{keyword}||'%'
+		    </when>
+		    <otherwise>
+         	btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%' or bname like '%'||#{keyword}||'%'
+      		</otherwise>
+		</choose>
+		) t2 where num between #{startRecord} and #{endRecord}
+	</select>
+	
+	<select id="searchTotalRec" resultType="int">
+		select count(*) from (select row_number() over (order by bgroup desc, bstep asc) as num, t1.*
+      from bbs t1 where bnum > 0 and
+		<choose>
+		    <when test='searchType == "TC"'>
+		      btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%'
+		    </when>
+		    <when test='searchType == "T"'>
+		      btitle like '%'||#{keyword}||'%'
+		    </when>
+		    <when test='searchType == "C"'>
+		      bcontent like '%'||#{keyword}||'%'
+		    </when>
+		    <when test='searchType == "W"'>
+		      bname like '%'||#{keyword}||'%'
+		    </when>
+		    <otherwise>
+         	btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%' or bname like '%'||#{keyword}||'%'
+      		</otherwise>
+		</choose>
+		) t2
+	</select>
+	
+	<update id = "hit">
+		update bbs set bhit=bhit+1
+		where bnum = #{bnum}
+	</update>
+	
+	<update id="updateStep">
+		update bbs set bstep=bstep+1 where bgroup=#{bgroup} and bstep > #{bstep}
+	</update>
+	
+</mapper>

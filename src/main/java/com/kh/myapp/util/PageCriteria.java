@@ -1,7 +1,7 @@
 package com.kh.myapp.util;
 
 public class PageCriteria {
-	private final int pageNumPerPage = 10; // 한페이지에 보여줄 페이지수
+	private int pageNumPerPage = 10; // 한페이지에 보여줄 페이지수
 	private int startPage; // 한페이지의 시작페이지
 	private int endPage; // 한페이지의 종료페이지
 
@@ -17,11 +17,18 @@ public class PageCriteria {
 		this.recordCriteria = recordCriteria;
 	}
 
-	public PageCriteria(RecordCriteria recordCritera, int totalRec) {
-		this(recordCritera);
+	public PageCriteria(RecordCriteria recordCriteria, int totalRec) {
+		this(recordCriteria);
 		this.totalRec = totalRec;
 		this.init();
 	}
+
+	public PageCriteria(RecordCriteria recordCriteria, int totalRec, int pageNumPerPage) {
+	      this(recordCriteria);
+	      this.totalRec = totalRec;
+	      this.pageNumPerPage = pageNumPerPage;
+	      init();
+	   }
 
 	private void init() {
 		// 1) endPage 계산
@@ -111,10 +118,10 @@ public class PageCriteria {
 		
 		if(recordCriteria instanceof FindCriteria) {	// 객체(부모) instanceof 클래스(자식)	:  자식을 부모타입으로 형변환할수있는지 확인..?용도? 
 			if(((FindCriteria)recordCriteria).getsearchType() != null ||((FindCriteria)recordCriteria).getsearchType().trim().equals("")) {
-				str.append("&option="+((FindCriteria)recordCriteria).getsearchType());
+				str.append("&searchType="+((FindCriteria)recordCriteria).getsearchType());
 			}
 			if(((FindCriteria)recordCriteria).getkeyword() != null || ((FindCriteria)recordCriteria).getkeyword().trim().equals("")) {
-				str.append("&search="+((FindCriteria)recordCriteria).getkeyword());
+				str.append("&keyword="+((FindCriteria)recordCriteria).getkeyword());
 			}
 		}
 		

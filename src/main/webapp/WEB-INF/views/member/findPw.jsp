@@ -5,7 +5,7 @@
 <script>
 $(function(){
 	$("#foundPwContent").hide();
-	$("#findPw").on("click",function(e) {
+	$("#findPW").on("click",function(e) {
 	   var id = $("input[id=id]").val();
 	   var name = $("input[id=names]").val();
 	   var phone = $("input[id=phones]").val();
@@ -40,7 +40,7 @@ $(function(){
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form:form modelAttribute="find" method="post">
+			<form:form modelAttribute="findPw" method="post">
 			<div class="modal-body">
 						<!-- Material input email -->
 						<div class="md-form">
@@ -67,7 +67,7 @@ $(function(){
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" id="findPw" class="btn btn-primary" data-target="#modalSubscriptionForm">Find Password</button>
+				<button type="button" id="findPW" class="btn btn-primary" data-target="#modalSubscriptionForm">Find Password</button>
 			</div>
 			</form:form>
 		</div>

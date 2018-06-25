@@ -15,4 +15,9 @@ public class MainController {
 	public String main2() {
 		return "hello";
 	}
+	
+	@RequestMapping(value="/hello2")
+	public String main3() {
+		return "hello2";
+	}
 }

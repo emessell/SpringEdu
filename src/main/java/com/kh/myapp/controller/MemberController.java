@@ -27,16 +27,13 @@ public class MemberController {
 	@Qualifier("memberServiceImplXML")
 	MemberService memberService;
 
-	@RequestMapping("/memberJoin")
-	public void memberJoin(Model model) {
-		model.addAttribute("memberVO", new MemberVO());
-	}
+	
 
 	@RequestMapping(value = "/memberJoinOK", method = RequestMethod.POST)
 	public String memberJoinOK(@Valid MemberVO memberVO, BindingResult result) {
 		if (result.hasErrors()) {
 			System.out.println("회원가입시 오류 발생");
-			return "/member/memberJoin";
+			return "/login/memberJoin";
 		} else {
 			memberService.memberInsert(memberVO);
 			logger.info("회원가입 완료");

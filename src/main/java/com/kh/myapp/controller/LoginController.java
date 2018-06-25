@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.myapp.login.service.LoginService;
 import com.kh.myapp.login.vo.LoginVO;
-import com.kh.myapp.login.vo.SecurityLoginVO;
 import com.kh.myapp.member.dao.MemberDAO;
 import com.kh.myapp.member.vo.MemberVO;
 
@@ -47,12 +46,11 @@ public class LoginController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(!auth.getPrincipal().equals("anonymousUser")) {
 			logger.info("인증 : "+auth.getPrincipal());
-			return "login/login";
+			return "redirect:/";
 		}
-			model.addAttribute("login",new SecurityLoginVO());
-			model.addAttribute("find", new MemberVO());
-			return "login/login";
-		
+		model.addAttribute("findId", new MemberVO());
+		model.addAttribute("findPw", new MemberVO());
+		return "login/login";
 	}
 	
 	//로그인 처리 부분
@@ -82,4 +80,9 @@ public class LoginController {
 		return "redirect:/"; 
 	}
 	
+	//회원가입
+	@RequestMapping("/memberJoin")
+	public void memberJoin(Model model) {
+		model.addAttribute("memberVO", new MemberVO());
+	}
 }

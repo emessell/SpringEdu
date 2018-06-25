@@ -4,37 +4,54 @@
 	xmlns="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
-
+		
+	<!-- spring security 적용 제외. -->
+	<!-- <http pattern="/bbs/**" security="none"/> -->
+	<http pattern="/resources/**" security="none"/>
+	<http pattern="/images/**" security="none"/>
+	<http pattern="/css/**" security="none"/>
+	<http pattern="/js/**" security="none"/>
+	
 	<!-- auto-config="true" : 로그인 페이지 /http 기본인증. /로그아웃 기능 등을 제공 -->
-	<http auto-config="true">
+	<http auto-config="true" use-expressions="true">
 		
 		<!-- login-page :  로그인 페이지 지정 속성,  authentication-failure-url : 로그인 실패시 이동페이지 지정 -->
-		<form-login login-page="/login/login"
-		authentication-failure-url="/login/login?fail"
-		login-processing-url="/a"/>
+		<form-login login-page="/login/login" authentication-failure-url="/login/login?fail" />
+		<!-- login-processing-url="/a"/> -->
 		
 		
 		<!-- access="isAuthenticated()" : 인증된 회원만 -->
+		<intercept-url pattern="/bbs/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/member/**" access="isAuthenticated()"/>
 		<!-- 관리자만 접근 -->
-		<intercept-url pattern="/admin/**" access="hasAuthenticated('ROLE_ADMIN')"/>
+		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
 		<!-- access="permitAll" : 누구나 -->
 		<intercept-url pattern="/**" access="permitAll"/>
 		<!-- 로그아웃 주소 지정 및 로그아웃 성공시 주소 지정 -->
 		<logout logout-url="/login/logout" logout-success-url="/login/login"
       delete-cookies="true" invalidate-session="true" />
+      
+      <!-- 다중 로그인 방지 -->
+      <session-management>
+      	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/>
+      </session-management>
 		
 	</http>
-	<beans:bean id="encoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder" />
+	
+		<beans:bean id="encoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
+		<beans:bean id="userService" class="com.kh.myapp.login.dao.LoginDAOImplSecurity"/>
 		<authentication-manager>
-			<authentication-provider>
-				<!-- <user-service>
+			<!-- UserDetailsService 직접 구현하여 커스터마이징 한 구현 클래스 사용 -->
+			<authentication-provider user-service-ref="userService">
+				<!-- InMemoryDAOImpl 방식
+				<user-service>
 					<user name="guest" password="{noop}guest" authorities="ROLE_USER"/>
 					<user name="admin" password="{noop}admin" authorities="ROLE_ADMIN,ROLE_USER"/>
 				</user-service> -->
+				<!-- JdbcDAOImpl 방식
 				<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select id,passwd,enable from member where id=?"
-				authorities-by-username-query="select t1.id, t2.role from member t1, user_role t2 where t1.id=t2.id and t1.id=?"/>
+				authorities-by-username-query="select t1.id, t2.role from member t1, user_role t2 where t1.id=t2.id and t1.id=?"/> -->
 				<password-encoder ref="encoder"></password-encoder>
 			</authentication-provider>
 		</authentication-manager>

@@ -5,7 +5,7 @@
 <script>
 $(function(){
 	$("#foundIdModal").hide();
-	$("#findId").on("click",function(e) {
+	$("#findID").on("click",function(e) {
 	    var name = $("input[name=name]").val();
 	   var phone = $("input[name=phone]").val();
 	   $.ajax({
@@ -40,7 +40,7 @@ $(function(){
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form:form modelAttribute="find" method="post">
+			<form:form modelAttribute="findId" method="post">
 			<div class="modal-body">
 						<!-- Material input email -->
 						<div class="md-form">
@@ -60,7 +60,7 @@ $(function(){
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" id="findId" class="btn btn-primary" data-target="#modalSubscriptionForm">Find ID</button>
+				<button type="button" id="findID" class="btn btn-primary" data-target="#modalSubscriptionForm">Find ID</button>
 			</div>
 			</form:form>
 		</div>
